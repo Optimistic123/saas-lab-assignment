@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import "./App.css";
+import CustomTable from "./Component/CustomTable";
 
 const API_URL =
   "https://raw.githubusercontent.com/saaslabsco/frontend-assignment/refs/heads/master/frontend-assignment.json";
@@ -26,37 +27,15 @@ function App() {
 
   return (
     <div className="App">
-      <h1>Kickstarter Projects</h1>
-      <table>
-        <thead>
-          <tr>
-            <th>S.No</th>
-            <th>Percentage Funded</th>
-            <th>Amount Pledged</th>
-          </tr>
-        </thead>
-        <tbody>
-          {currentRecords.map((project, index) => (
-            <tr key={index}>
-              <td>{firstIndex + index + 1}</td>
-              <td>{project["percentage.funded"]}</td>
-              <td>{project["amt.pledged"]}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-
-      {/* Pagination */}
-      <div className="pagination">
-        {Array.from({ length: totalPages }, (_, i) => (
-          <button
-            key={i}
-            onClick={() => handlePageChange(i + 1)}
-            disabled={i + 1 === currentPage}
-          >
-            {i + 1}
-          </button>
-        ))}
+      <div className="content-container">
+        <h1>Kickstarter Projects</h1>
+        <CustomTable
+          currentRecords={currentRecords}
+          firstIndex={firstIndex}
+          totalPages={totalPages}
+          handlePageChange={handlePageChange}
+          currentPage={currentPage}
+        />
       </div>
     </div>
   );
